@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>funfenCare - 独居老人安全监护与亲情连接平台 README</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #4CAF50;
+            --accent-color: #FF5722;
+            --text-color: #333;
+            --bg-color: #F5F7FA;
+            --section-bg: #FFFFFF;
+            --border-color: #E0E0E0;
+            --warning-color: #FF6B6B;
+            --success-color: #4CAF50;
+            --info-color: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 2rem;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 3px solid var(--primary-color);
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .badge-version { background: var(--primary-color); color: white; }
+        .badge-license { background: var(--secondary-color); color: white; }
+        .badge-status { background: var(--accent-color); color: white; }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin: 1.5rem 0 0.8rem;
+        }
+        
+        section {
+            background: var(--section-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .intro {
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+        
+        .highlight {
+            background: #E3F2FD;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .highlight-warm {
+            background: #FFF3E0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1rem;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #F5F5F5;
+            font-weight: 600;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            background: #FAFAFA;
+            transition: transform 0.2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .feature-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        pre {
+            background: #282C34;
+            color: #ABB2BF;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9rem;
+        }
+        
+        p code, li code {
+            background: #F0F0F0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 1.5rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+        
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .warning-box {
+            background: #FFF3CD;
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .tip-box {
+            background: #D4EDDA;
+            border-left: 4px solid var(--success-color);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .info-box {
+            background: #D1ECF1;
+            border-left: 4px solid var(--info-color);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        details {
+            margin: 1rem 0;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        details summary {
+            padding: 1rem 1.5rem;
+            background: #F5F5F5;
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker { display: none; }
+        
+        details summary::before {
+            content: "▶ ";
+            color: var(--primary-color);
+        }
+        
+        details[open] summary::before { content: "▼ "; }
+        
+        details .content { padding: 1.5rem; }
+        
+        .toc {
+            background: #F8F9FA;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li { margin: 0.5rem 0; }
+        
+        .toc a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .toc a:hover { text-decoration: underline; }
+        
+        .service-flow {
+            background: #F8F9FA;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .service-flow h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .flow-number {
+            min-width: 2rem;
+            height: 2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .contribution-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contribution-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .contribution-step .step-number {
+            min-width: 2rem;
+            height: 2rem;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .scenario-card {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            background: white;
+        }
+        
+        .scenario-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .scenario-card .user-role {
+            display: inline-block;
+            background: #E8F5E9;
+            color: #2E7D32;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #666;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+        
+        .architecture-svg {
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏡 funfenCare</h1>
+            <p class="tagline">独居老人安全监护与亲情连接平台 — 让远方的家人安心</p>
+            <div class="badges">
+                <span class="badge badge-version">v2.0.0</span>
+                <span class="badge badge-license">Apache-2.0</span>
+                <span class="badge badge-status">开发中</span>
+            </div>
+        </header>
+
+        <nav class="toc">
+            <h3>📑 目录</h3>
+            <ul>
+                <li><a href="#intro">产品简介</a></li>
+                <li><a href="#scenarios">使用场景</a></li>
+                <li><a href="#features">核心功能</a></li>
+                <li><a href="#hardware">硬件接入（ruview）</a></li>
+                <li><a href="#tech-stack">技术架构</a></li>
+                <li><a href="#install">安装与部署</a></li>
+                <li><a href="#usage">使用示例</a></li>
+                <li><a href="#api">API 接口</a></li>
+                <li><a href="#security">安全与隐私</a></li>
+                <li><a href="#contribute">贡献指南</a></li>
+                <li><a href="#roadmap">产品路线图</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav>
+
+        <section id="intro">
+            <h2>📖 产品简介</h2>
+            <p class="intro">
+                <strong>funfenCare</strong>是一款面向<span class="highlight">独居老人及独居人士</span>的<span class="highlight-warm">安全监护+亲情连接</span>综合服务平台。通过<span class="highlight">智能硬件监控</span>、<span class="highlight">上门打卡服务</span>、<span class="highlight">定制问候聊天</span>三大核心能力，为远在外地、国外的子女家人提供实时了解老人生活状况的安心方案。
+            </p>
+            
+            <div class="info-box">
+                <strong>核心价值主张：</strong>
+                <ul>
+                    <li>对老人：安全有保障、日常有关怀、孤独有陪伴</li>
+                    <li>对子女：实时掌握父母状况、异常情况及时知晓、远程也能尽孝心</li>
+                    <li>对社会：降低独居老人意外风险、构建社区关爱网络</li>
+                </ul>
+            </div>
+
+            <h3>🎯 目标用户</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>用户角色</th>
+                        <th>特征描述</th>
+                        <th>核心诉求</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>👴 独居老人</td>
+                        <td>60岁以上，子女不在身边，独自生活</td>
+                        <td>安全保障、日常问候、紧急求助</td>
+                    </tr>
+                    <tr>
+                        <td>👩‍💼 独居人士</td>
+                        <td>单身独居，有安全监护需求</td>
+                        <td>安全打卡、异常报警、紧急联系</td>
+                    </tr>
+                    <tr>
+                        <td>👨‍👩‍👧 子女家人</td>
+                        <td>在外地/国外工作生活，关心父母状况</td>
+                        <td>实时查看父母状态、接收异常通知、远程下单服务</td>
+                    </tr>
+                    <tr>
+                        <td>🚪 服务人员</td>
+                        <td>社区网格员、志愿者、职业陪护员</td>
+                        <td>接单上门、打卡签到、记录反馈</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="scenarios">
+            <h2>🎬 使用场景</h2>
+            
+            <div class="scenario-card">
+                <h4>场景一：海外子女的安心守护</h4>
+                <p>
+                    <span class="user-role">👩 女儿在美国</span>
+                    <span class="user-role">👴 父亲在广州独居</span>
+                </p>
+                <p>
+                    女儿通过funfenCareApp，每天查看父亲的<strong>WiFi体感活动报告</strong>，确认父亲正常起居。每周一、三、五预约<strong>上门打卡服务</strong>，社区网格员上门敲门确认老人安全，拍照打卡后女儿即时收到通知。父亲生日当天，女儿在App内订购<strong>定制问候聊天服务</strong>，陪护员上门陪父亲聊天1小时，女儿通过App实时查看服务过程。
+                </p>
+            </div>
+
+            <div class="scenario-card">
+                <h4>场景二：异常行为智能预警</h4>
+                <p>
+                    <span class="user-role">👴 独居老人</span>
+                    <span class="user-role">📱 WiFi体感监控</span>
+                </p>
+                <p>
+                    WiFi体感设备检测到老人<strong>超过24小时无活动轨迹</strong>，系统自动触发一级预警，推送通知给子女和紧急联系人。子女确认后，立即通过App下单<strong>紧急上门查看服务</strong>，服务人员15分钟内到达现场，确认老人安全后反馈结果。
+                </p>
+            </div>
+
+            <div class="scenario-card">
+                <h4>场景三：日常关怀与社交</h4>
+                <p>
+                    <span class="user-role">👴 独居老人</span>
+                    <span class="user-role">👩‍💼 陪护员</span>
+                </p>
+                <p>
+                    老人通过App预约每日<strong>"早安问候"电话</strong>，陪聊员按时致电，询问健康状况、聊天解闷。老人还可以加入<strong>兴趣社群</strong>（如书法、戏曲、养生），与其他老人语音交流，减少孤独感。
+                </p>
+            </div>
+        </section>
+
+        <section id="features">
+            <h2>✨ 核心功能</h2>
+            
+            <h3>🛡️ 安全监护</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">📡</div>
+                    <h4>WiFi体感监控</h4>
+                    <p>通过WiFi信号波动检测人体活动，无需穿戴设备，保护隐私的同时实时监控起居规律。支持异常行为预警（长时间无活动、跌倒检测等）。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">🚪</div>
+                    <h4>上门打卡服务</h4>
+                    <p>类似滴滴模式，子女下单预约，服务人员（网格员/志愿者/陪护员）上门敲门确认老人安全，GPS定位+拍照打卡，实时同步给子女。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">🚨</div>
+                    <h4>紧急求助</h4>
+                    <p>一键SOS呼叫，直连子女+紧急联系人+社区服务中心。支持语音呼救、自动发送位置、自动拨打120。</p>
+                </div>
+            </div>
+
+            <h3>💬 亲情连接</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">📞</div>
+                    <h4>定制问候聊天</h4>
+                    <p>预约陪聊员上门或电话聊天服务，可按话题定制（如"聊聊养生""听听戏曲""回忆往事"）。支持AI辅助陪聊+真人陪护双模式。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">👨‍👩‍👧</div>
+                    <h4>亲情圈</h4>
+                    <p>子女、亲属、邻居、社区网格员组成"亲情圈"，共同关注老人状态。支持多端实时同步、异常通知、服务协同。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h4>健康日报</h4>
+                    <p>自动生成老人每日活动报告（起居规律、活动量、情绪状态），推送给子女。支持周报/月报趋势分析。</p>
+                </div>
+            </div>
+
+            <h3>📱 适老化设计</h3>
+            <ul>
+                <li><strong>大字模式</strong>：全局字体放大，高对比度配色</li>
+                <li><strong>语音辅助</strong>：语音播报操作指引、语音输入</li>
+                <li><strong>极简交互</strong>：核心功能3步内完成，底部仅4个Tab（首页、监控、服务、我的）</li>
+                <li><strong>防误触</strong>：大按钮、长按确认、操作回退</li>
+            </ul>
+        </section>
+
+        <section id="hardware">
+            <h2>📡 硬件接入（ruview）</h2>
+            
+            <p>本项目接入 <a href="https://github.com/codemkt/ruview" target="_blank">ruview</a> 开源硬件方案，实现WiFi体感人类活动检测。</p>
+            
+            <h3>ruview 简介</h3>
+            <p>
+                ruview 是基于 WiFi CSI（Channel State Information）的开源人体活动检测项目。通过分析WiFi信号的微小变化，可以在<strong>无需摄像头、无需穿戴设备</strong>的情况下，检测到房间内是否有人活动、活动轨迹和频率。
+            </p>
+            
+            <h3>硬件清单</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>组件</th>
+                        <th>型号推荐</th>
+                        <th>数量</th>
+                        <th>预估成本</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ESP32开发板</td>
+                        <td>ESP32-WROOM-32</td>
+                        <td>2（发射+接收）</td>
+                        <td>¥50</td>
+                    </tr>
+                    <tr>
+                        <td>天线</td>
+                        <td>2.4GHz 全向天线</td>
+                        <td>2</td>
+                        <td>¥20</td>
+                    </tr>
+                    <tr>
+                        <td>外壳</td>
+                        <td>3D打印/亚克力</td>
+                        <td>2</td>
+                        <td>¥30</td>
+                    </tr>
+                    <tr>
+                        <td>电源</td>
+                        <td>5V/2A USB供电</td>
+                        <td>2</td>
+                        <td>¥20</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>安装步骤</h3>
+            <ol class="step-list">
+                <li>
+                    <strong>烧录固件</strong>
+                    <pre><code># 克隆 ruview 仓库
+git clone https://github.com/codemkt/ruview.git
+cd ruview
+
+# 使用 PlatformIO 编译烧录
+pio run --target upload --upload-port /dev/ttyUSB0</code></pre>
+                </li>
+                <li>
+                    <strong>部署设备</strong>
+                    <p>将发射器和接收器分别放置在房间对角线位置，确保信号覆盖主要活动区域（客厅、卧室）。</p>
+                </li>
+                <li>
+                    <strong>配置数据上报</strong>
+                    <pre><code># 在 ruview 配置文件中设置funfenCare平台地址
+# config.ini
+[server]
+url = https://api.fufen-companion.com/api/v1/hardware/csi
+token = your_device_token</code></pre>
+                </li>
+                <li>
+                    <strong>绑定设备到用户</strong>
+                    <p>在funfenCareApp内扫描设备二维码，完成设备与老人的绑定。</p>
+                </li>
+            </ol>
+
+            <div class="tip-box">
+                <strong>隐私保护：</strong>WiFi体感仅检测活动频率和轨迹，<strong>不采集图像、不录音、不识别身份</strong>，严格遵守隐私保护原则。
+            </div>
+
+            <details>
+                <summary>查看数据流架构图</summary>
+                <div class="content">
+                    <pre><code>┌─────────────┐         ┌─────────────┐
+│  ESP32 发射器 │ ───WiFi──▶ │  ESP32 接收器 │
+└─────────────┘   信号     └─────────────┘
+                                │
+                           CSI数据上报
+                                │
+                    ┌─────────────────────┐
+                    │  funfenCare云平台      │
+                    │                     │
+                    │  • 数据清洗          │
+                    │  • 活动识别          │
+                    │  • 异常检测          │
+                    │  • 报告生成          │
+                    └─────────────────────┘
+                                │
+                    ┌─────────────────────┐
+                    │  推送通知            │
+                    │                     │
+                    │  📱 子女App          │
+                    │  💬 短信/微信        │
+                    │  📞 电话语音         │
+                    └─────────────────────┘</code></pre>
+                </div>
+            </details>
+        </section>
+
+        <section id="tech-stack">
+            <h2>🛠️ 技术架构</h2>
+            
+            <h3>整体架构</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>层级</th>
+                        <th>技术选型</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>硬件层</strong></td>
+                        <td>ESP32 + ruview</td>
+                        <td>WiFi CSI采集、边缘计算</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IoT网关</strong></td>
+                        <td>MQTT + EMQX</td>
+                        <td>设备接入、消息路由</td>
+                    </tr>
+                    <tr>
+                        <td><strong>后端</strong></td>
+                        <td>Python FastAPI</td>
+                        <td>业务API、数据处理、AI推理</td>
+                    </tr>
+                    <tr>
+                        <td><strong>数据库</strong></td>
+                        <td>PostgreSQL + Redis + InfluxDB</td>
+                        <td>关系数据 + 缓存 + 时序数据</td>
+                    </tr>
+                    <tr>
+                        <td><strong>前端</strong></td>
+                        <td>React Native + 微信小程序</td>
+                        <td>跨平台App + 小程序轻量版</td>
+                    </tr>
+                    <tr>
+                        <td><strong>实时通信</strong></td>
+                        <td>WebSocket + WebRTC</td>
+                        <td>语音通话、视频服务</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI能力</strong></td>
+                        <td>LLM + 时序分析</td>
+                        <td>活动模式分析、异常检测、智能陪聊</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <details>
+                <summary>查看完整系统架构图</summary>
+                <div class="content">
+                    <pre><code>┌─────────────────────────────────────────────────────┐
+│                    用户端                             │
+│  ┌──────────┐  ┌──────────┐  ┌──────────────────┐   │
+│  │ 子女App  │  │ 老人App  │  │ 服务人员端        │   │
+│  │ (iOS/And)│  │ (大字版) │  │ (打卡/接单)       │   │
+│  └──────────┘  └──────────┴──┴──────────────────┘   │
+└─────────────────────────────────────────────────────┘
+                         │
+┌─────────────────────────────────────────────────────┐
+│                   API 网关                           │
+│  认证鉴权 │ 限流熔断 │ 日志监控 │ 负载均衡           │
+└─────────────────────────────────────────────────────┘
+                         │
+┌─────────────────────────────────────────────────────┐
+│                  微服务集群                           │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌──────────┐  │
+│  │ 用户服务│ │ 设备服务│ │ 订单服务│ │ 监控服务 │  │
+│  └─────────┘ └─────────┘ └─────────┘ └──────────┘  │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌──────────┐  │
+│  │ 打卡服务│ │ 陪聊服务│ │ 通知服务│ │ AI分析服务│  │
+│  └─────────┘ └─────────┘ └─────────┘ └──────────┘  │
+└─────────────────────────────────────────────────────┘
+                         │
+┌─────────────────────────────────────────────────────┐
+│                    数据层                             │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐             │
+│  │PostgreSQL│ │  Redis   │ │InfluxDB  │             │
+│  │(业务数据)│ │ (缓存)   │ │(时序数据)│             │
+│  └──────────┘ └──────────┘ └──────────┘             │
+└─────────────────────────────────────────────────────┘
+                         │
+┌─────────────────────────────────────────────────────┐
+│                  IoT 设备层                           │
+│  ┌─────────────────┐  ┌─────────────────┐           │
+│  │ ESP32 ruview A  │  │ ESP32 ruview B  │ ...       │
+│  │ (WiFi CSI采集)  │  │ (WiFi CSI采集)  │           │
+│  └─────────────────┘  └─────────────────┘           │
+└─────────────────────────────────────────────────────┘</code></pre>
+                </div>
+            </details>
+        </section>
+
+        <section id="install">
+            <h2>📦 安装与部署</h2>
+            
+            <h3>环境要求</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>组件</th>
+                        <th>最低版本</th>
+                        <th>推荐版本</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Python</td>
+                        <td>3.9</td>
+                        <td>3.11+</td>
+                    </tr>
+                    <tr>
+                        <td>Node.js</td>
+                        <td>16</td>
+                        <td>18 LTS</td>
+                    </tr>
+                    <tr>
+                        <td>PostgreSQL</td>
+                        <td>12</td>
+                        <td>15+</td>
+                    </tr>
+                    <tr>
+                        <td>Redis</td>
+                        <td>6.0</td>
+                        <td>7.0+</td>
+                    </tr>
+                    <tr>
+                        <td>InfluxDB</td>
+                        <td>2.0</td>
+                        <td>2.7+</td>
+                    </tr>
+                    <tr>
+                        <td>EMQX (MQTT)</td>
+                        <td>5.0</td>
+                        <td>5.4+</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>快速开始</h3>
+            
+            <ol class="step-list">
+                <li>
+                    <strong>克隆仓库</strong>
+                    <pre><code>git clone https://github.com/your-org/fufen-companion.git
+cd fufen-companion</code></pre>
+                </li>
+                <li>
+                    <strong>配置环境变量</strong>
+                    <pre><code>cp .env.example .env
+# 编辑 .env 文件，填写必要配置</code></pre>
+                    
+                    <div class="tip-box">
+                        <strong>必要配置项：</strong>
+                        <ul>
+                            <li><code>DATABASE_URL</code> - PostgreSQL连接字符串</li>
+                            <li><code>REDIS_URL</code> - Redis连接地址</li>
+                            <li><code>INFLUXDB_URL</code> - InfluxDB连接地址</li>
+                            <li><code>MQTT_BROKER_URL</code> - MQTT Broker地址</li>
+                            <li><code>JWT_SECRET</code> - JWT签名密钥</li>
+                            <li><code>WECHAT_APP_ID</code> - 微信小程序AppID</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <strong>安装后端依赖</strong>
+                    <pre><code>cd backend
+pip install -r requirements.txt</code></pre>
+                </li>
+                <li>
+                    <strong>初始化数据库</strong>
+                    <pre><code># 创建数据库
+createdb fufen_companion
+
+# 运行迁移
+python manage.py migrate</code></pre>
+                </li>
+                <li>
+                    <strong>启动后端服务</strong>
+                    <pre><code># 开发模式
+python manage.py runserver
+
+# 生产模式（gunicorn）
+gunicorn manage:app -w 4 -b 0.0.0.0:8000</code></pre>
+                </li>
+                <li>
+                    <strong>启动前端</strong>
+                    <pre><code>cd frontend
+npm install
+npm run dev</code></pre>
+                </li>
+                <li>
+                    <strong>启动IoT网关</strong>
+                    <pre><code># 安装 EMQX
+docker run -d --name emqx -p 1883:1883 -p 8084:8084 emqx/emqx:5.4</code></pre>
+                </li>
+            </ol>
+
+            <h3>Docker Compose 一键部署</h3>
+            <pre><code># 启动所有服务
+docker-compose up -d
+
+# 查看服务状态
+docker-compose ps
+
+# 查看日志
+docker-compose logs -f backend
+
+# 停止服务
+docker-compose down</code></pre>
+
+            <div class="warning-box">
+                <strong>生产环境注意：</strong>请勿使用默认配置直接部署到生产环境。务必修改密钥、启用HTTPS、配置防火墙规则、设置数据库备份策略。
+            </div>
+        </section>
+
+        <section id="usage">
+            <h2>💡 使用示例</h2>
+            
+            <h3>👨‍👩‍👧 子女端操作</h3>
+            
+            <details>
+                <summary>查看：绑定父母设备</summary>
+                <div class="content">
+                    <ol>
+                        <li>打开funfenCareApp，进入"亲情圈"</li>
+                        <li>点击"添加成员"，输入父母手机号</li>
+                        <li>父母确认加入后，扫描家中WiFi体感设备二维码</li>
+                        <li>绑定成功，可实时查看父母活动状态</li>
+                    </ol>
+                </div>
+            </details>
+
+            <details>
+                <summary>查看：预约上门打卡服务</summary>
+                <div class="content">
+                    <ol>
+                        <li>进入"服务"页面，选择"上门打卡"</li>
+                        <li>选择父母地址，设置服务频率（如每周一三五上午9点）</li>
+                        <li>确认订单并支付（支持包月/包年套餐）</li>
+                        <li>服务人员接单后，按时上门敲门确认</li>
+                        <li>打卡完成后，子女即时收到通知和现场照片</li>
+                    </ol>
+                </div>
+            </details>
+
+            <details>
+                <summary>查看：查看健康日报</summary>
+                <div class="content">
+                    <pre><code># 每日自动推送
+📊 健康日报 - 2026-05-10
+
+👤 老人：张大爷
+📍 地址：广州市天河区XX小区
+
+📈 今日活动：
+• 起床时间：07:30（比平时晚1小时）
+• 活动量：正常（步数约3200步）
+• 起居规律：良好
+
+⚠️ 异常记录：无
+
+💬 今日服务：
+• 上午10:00 网格员上门打卡（正常）
+• 下午15:00 陪聊员电话问候（15分钟）
+
+🔋 设备状态：WiFi体感在线
+
+查看详情 > [点击进入App]</code></pre>
+                </div>
+            </details>
+
+            <h3>👴 老人端操作</h3>
+            <details>
+                <summary>查看：一键SOS求助</summary>
+                <div class="content">
+                    <ol>
+                        <li>打开App首页，点击红色大按钮"SOS"</li>
+                        <li>长按3秒确认（防误触）</li>
+                        <li>系统自动：
+                            <ul>
+                                <li>拨打子女电话</li>
+                                <li>发送当前位置</li>
+                                <li>通知社区服务中心</li>
+                            </ul>
+                        </li>
+                        <li>等待救援，保持通话</li>
+                    </ol>
+                </div>
+            </details>
+
+            <h3>🚪 服务人员端操作</h3>
+            <details>
+                <summary>查看：接单上门打卡</summary>
+                <div class="content">
+                    <ol>
+                        <li>收到新订单通知</li>
+                        <li>点击"接单"，查看老人地址和备注信息</li>
+                        <li>到达现场后，点击"开始打卡"</li>
+                        <li>敲门确认老人安全，拍摄现场照片</li>
+                        <li>填写服务记录（老人状态、异常情况备注）</li>
+                        <li>提交打卡记录，系统自动通知子女</li>
+                    </ol>
+                </div>
+            </details>
+
+            <h3>📡 API 调用示例</h3>
+            
+            <details>
+                <summary>查看：WiFi体感数据查询</summary>
+                <div class="content">
+                    <pre><code>GET /api/v1/hardware/activity?user_id=user_123&date=2026-05-10
+Authorization: Bearer &lt;token&gt;
+
+# 响应示例
+{
+  "status": "success",
+  "data": {
+    "user_id": "user_123",
+    "date": "2026-05-10",
+    "activity_summary": {
+      "wake_time": "07:30",
+      "sleep_time": "22:15",
+      "activity_score": 85,
+      "anomaly_detected": false
+    },
+    "hourly_data": [
+      {"hour": 7, "activity": 0.8},
+      {"hour": 8, "activity": 0.6},
+      ...
+    ]
+  }
+}</code></pre>
+                </div>
+            </details>
+
+            <details>
+                <summary>查看：创建上门打卡订单</summary>
+                <div class="content">
+                    <pre><code>POST /api/v1/service/checkin-order
+Content-Type: application/json
+Authorization: Bearer &lt;token&gt;
+
+{
+  "elder_user_id": "elder_456",
+  "service_type": "door_check",
+  "frequency": "weekly",
+  "schedule": ["monday", "wednesday", "friday"],
+  "time_slot": "09:00-11:00",
+  "notes": "请敲门确认安全即可，无需长聊"
+}
+
+# 响应示例
+{
+  "status": "success",
+  "data": {
+    "order_id": "order_789",
+    "estimated_price": 199.00,
+    "next_service_date": "2026-05-12"
+  }
+}</code></pre>
+                </div>
+            </details>
+        </section>
+
+        <section id="api">
+            <h2>🔌 API 接口文档</h2>
+            
+            <p>完整API文档请访问：<a href="https://api.fufen-companion.com/docs" target="_blank">https://api.fufen-companion.com/docs</a></p>
+            
+            <h3>核心接口列表</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>接口路径</th>
+                        <th>方法</th>
+                        <th>功能说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/api/v1/auth/sms-login</code></td>
+                        <td>POST</td>
+                        <td>手机号验证码登录</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/v1/family/bind</code></td>
+                        <td>POST</td>
+                        <td>绑定亲情关系</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/v1/hardware/bind-device</code></td>
+                        <td>POST</td>
+                        <td>绑定WiFi体感设备</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/v1/hardware/activity</code></td>
+                        <td>GET</td>
+                        <td>查询活动数据</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/v1/hardware/alert</code></td>
+                        <td>POST</td>
+                        <td>上报异常预警</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/v1/service/checkin-order</code></td>
+                        <td>POST</td>
+                        <td>创建打卡服务订单</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/v1/service/chat-order</code></td>
+                        <td>POST</td>
+                        <td>创建陪聊服务订单</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/v1/checkin/submit</code></td>
+                        <td>POST</td>
+                        <td>提交打卡记录</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/v1/emergency/sos</code></td>
+                        <td>POST</td>
+                        <td>触发紧急求助</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/v1/report/daily</code></td>
+                        <td>GET</td>
+                        <td>获取健康日报</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="security">
+            <h2>🔒 安全与隐私</h2>
+            
+            <h3>数据保护</h3>
+            <ul>
+                <li>数据传输全程加密（HTTPS/TLS 1.3）</li>
+                <li>敏感数据（手机号、身份证号、家庭地址）数据库字段加密</li>
+                <li>密码采用 bcrypt 哈希存储</li>
+                <li>JWT Token有效期限制 + 刷新机制</li>
+            </ul>
+            
+            <h3>隐私保护</h3>
+            <ul>
+                <li><strong>WiFi体感不采集图像/音频</strong>，仅检测活动频率和轨迹</li>
+                <li>上门服务照片仅用于打卡记录，服务完成后24小时自动删除</li>
+                <li>用户可随时导出个人数据或申请账号注销</li>
+                <li>隐私协议突出展示，首次使用时强制阅读确认</li>
+            </ul>
+
+            <h3>服务安全</h3>
+            <ul>
+                <li>服务人员实名认证 + 背景调查 + 定期培训</li>
+                <li>上门服务全程GPS轨迹记录</li>
+                <li>异常行为检测（频繁取消订单、超时服务等）</li>
+                <li>用户评价 + 投诉机制，24小时内处理反馈</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>适老化安全特性：</strong>针对老年用户群体，特别加强防诈骗提醒、异常交易拦截、亲属辅助验证等功能。
+            </div>
+        </section>
+
+        <section id="contribute">
+            <h2>🤝 贡献指南</h2>
+            
+            <p>我们欢迎所有形式的贡献，无论是代码、文档、设计还是翻译。以下是参与贡献的流程：</p>
+            
+            <div class="contribution-steps">
+                <div class="contribution-step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <strong>Fork 本仓库</strong><br>
+                        在GitHub上点击"Fork"按钮，将仓库复制到您的账号
+                    </div>
+                </div>
+                
+                <div class="contribution-step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <strong>创建特性分支</strong><br>
+                        <pre><code>git checkout -b feature/amazing-feature</code></pre>
+                    </div>
+                </div>
+                
+                <div class="contribution-step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <strong>提交更改</strong><br>
+                        <pre><code>git commit -m 'feat(hardware): add WiFi CSI anomaly detection'</code></pre>
+                    </div>
+                </div>
+                
+                <div class="contribution-step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <strong>推送到分支</strong><br>
+                        <pre><code>git push origin feature/amazing-feature</code></pre>
+                    </div>
+                </div>
+                
+                <div class="contribution-step">
+                    <div class="step-number">5</div>
+                    <div>
+                        <strong>提交 Pull Request</strong><br>
+                        在原仓库发起Pull Request，描述清楚改动内容和测试方法
+                    </div>
+                </div>
+            </div>
+
+            <h3>开发规范</h3>
+            
+            <details>
+                <summary>查看代码规范</summary>
+                <div class="content">
+                    <ul>
+                        <li>Python代码遵循PEP 8规范</li>
+                        <li>JavaScript/TypeScript遵循ESLint配置</li>
+                        <li>提交信息使用约定式提交（Conventional Commits）</li>
+                        <li>所有新功能需包含单元测试</li>
+                        <li>API变更需更新OpenAPI文档</li>
+                    </ul>
+                </div>
+            </details>
+
+            <h3>可以贡献的方向</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>领域</th>
+                        <th>具体内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🔌 硬件开发</td>
+                        <td>ruview优化、新设备接入、边缘计算算法</td>
+                    </tr>
+                    <tr>
+                        <td>📱 前端开发</td>
+                        <td>适老化UI、组件开发、性能优化</td>
+                    </tr>
+                    <tr>
+                        <td>⚙️ 后端开发</td>
+                        <td>API开发、数据库优化、时序数据分析</td>
+                    </tr>
+                    <tr>
+                        <td>🤖 AI算法</td>
+                        <td>活动模式识别、异常检测、智能陪聊</td>
+                    </tr>
+                    <tr>
+                        <td>🛡️ 安全</td>
+                        <td>隐私保护、数据加密、风控系统</td>
+                    </tr>
+                    <tr>
+                        <td>📝 文档</td>
+                        <td>API文档、部署指南、硬件安装手册</td>
+                    </tr>
+                    <tr>
+                        <td>🌐 国际化</td>
+                        <td>多语言翻译、本地化适配</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="roadmap">
+            <h2>🗺️ 产品路线图</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>阶段</th>
+                        <th>时间</th>
+                        <th>核心功能</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>v1.0 MVP</strong></td>
+                        <td>2026 Q2</td>
+                        <td>用户系统、亲情圈、WiFi体感基础监控、异常预警</td>
+                    </tr>
+                    <tr>
+                        <td><strong>v1.5</strong></td>
+                        <td>2026 Q3</td>
+                        <td>上门打卡服务、服务人员端、健康日报</td>
+                    </tr>
+                    <tr>
+                        <td><strong>v2.0</strong></td>
+                        <td>2026 Q4</td>
+                        <td>定制陪聊服务、AI辅助陪聊、微信小程序</td>
+                    </tr>
+                    <tr>
+                        <td><strong>v3.0</strong></td>
+                        <td>2027 Q1</td>
+                        <td>兴趣社群、视频通话、商业化运营</td>
+                    </tr>
+                    <tr>
+                        <td><strong>v4.0</strong></td>
+                        <td>2027 Q2</td>
+                        <td>社区合作网络、政府合作、规模化运营</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="contact">
+            <h2>📞 联系我们</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>渠道</th>
+                        <th>联系方式</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>📧 邮箱</td>
+                        <td><a href="mailto:contact@fufen-companion.com">contact@fufen-companion.com</a></td>
+                    </tr>
+                    <tr>
+                        <td>💬 微信</td>
+                        <td>关注"funfenCare"公众号</td>
+                    </tr>
+                    <tr>
+                        <td>🐛 Bug反馈</td>
+                        <td><a href="https://github.com/your-org/fufen-companion/issues" target="_blank">GitHub Issues</a></td>
+                    </tr>
+                    <tr>
+                        <td>💡 功能建议</td>
+                        <td><a href="https://github.com/your-org/fufen-companion/discussions" target="_blank">GitHub Discussions</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer>
+            <p>🏡 funfenCare - 让每一位独居老人都有人关心、有人陪伴</p>
+            <p>© 2026 Fufen Companion Team. Made with ❤️ for seniors living alone.</p>
+        </footer>
+    </div>
+</body>
+</html>
