@@ -393,8 +393,8 @@ Authorization: Bearer <token>
 
 | 渠道 | 联系方式 |
 |------|---------|
-| 📧 邮箱 | contact@funfencare.com |
-| 💬 微信 | 关注"funfenCare"公众号 |
+| 📧 邮箱 |duckwolf@gmail.com |
+| 💬 Web | 关注"http://duckwolf.cn" |
 | 🐛 Bug反馈 | [GitHub Issues](https://github.com/tomwugdgz/funfenCare/issues) |
 | 💡 功能建议 | [GitHub Discussions](https://github.com/tomwugdgz/funfenCare/discussions) |
 
