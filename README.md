@@ -1,6 +1,6 @@
 # 🏡 funfenCare
 
-> 独居老人安全监护与亲情连接平台 — 让远方的家人安心
+> 独居人士安全监护与亲情连接平台 — 让远方的家人安心
 
 ![Version](https://img.shields.io/badge/version-2.0.0-blue)
 ![License](https://img.shields.io/badge/license-Apache--2.0-green)
