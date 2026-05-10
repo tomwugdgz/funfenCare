@@ -1,0 +1,45 @@
+<!--pages/caregiver/dashboard/caregiver-dashboard.wxml 服务人员接单大厅-->
+<view class="container">
+  <view class="header-card">
+    <text class="title">🚪 接单大厅</text>
+    <text class="subtitle">我的等级: L{{level}} {{levelName}}</text>
+  </view>
+
+  <!-- 接单统计 -->
+  <view class="stats-row">
+    <view class="stat-item">
+      <text class="stat-value">{{todayOrders}}</text>
+      <text class="stat-label">今日接单</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{completedOrders}}</text>
+      <text class="stat-label">已完成</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">¥{{todayEarning}}</text>
+      <text class="stat-label">今日收入</text>
+    </view>
+  </view>
+
+  <!-- 可接订单列表 -->
+  <view class="section">
+    <text class="section-title">可接订单 ({{availableOrders.length}})</text>
+    <view wx:for="{{availableOrders}}" wx:key="id" class="order-card">
+      <view class="order-header">
+        <text class="order-type">{{item.typeName}}</text>
+        <view class="distance-badge">📍 {{item.distance}}</text>
+      </view>
+      <view class="order-info">
+        <text class="info-item">📅 {{item.time}}</text>
+        <text class="info-item">📍 {{item.address}}</text>
+        <text class="info-item">💰 ¥{{item.price}}</text>
+      </view>
+      <view class="order-notes">备注: {{item.notes || '无'}}</view>
+      <button class="btn btn-primary accept-btn" bindtap="acceptOrder" data-id="{{item.id}}">接单</button>
+    </view>
+    <view wx:if="{{availableOrders.length === 0}}" class="empty-state">
+      <text class="empty-icon">📋</text>
+      <text class="empty-text">暂无可接订单</text>
+    </view>
+  </view>
+</view>

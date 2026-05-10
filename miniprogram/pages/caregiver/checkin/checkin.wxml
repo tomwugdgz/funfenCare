@@ -1,0 +1,79 @@
+<!--pages/caregiver/checkin/checkin.wxml 上门打卡页面-->
+<view class="container">
+  <view class="header-card">
+    <text class="title">🚪 上门打卡</text>
+    <text class="subtitle">订单 #{{orderId}}</text>
+  </view>
+
+  <view class="card">
+    <text class="card-title">服务信息</text>
+    <view class="info-row">
+      <text class="info-label">服务对象</text>
+      <text class="info-value">{{elderName}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">服务地址</text>
+      <text class="info-value">{{address}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">服务类型</text>
+      <text class="info-value">{{serviceType}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">服务时间</text>
+      <text class="info-value">{{serviceTime}}</text>
+    </view>
+  </view>
+
+  <!-- 位置验证 -->
+  <view class="card">
+    <text class="card-title">📍 位置验证</text>
+    <view class="location-box {{isInRange ? 'success' : ''}}">
+      <text class="location-icon">{{isInRange ? '✅' : '📍'}}</text>
+      <text class="location-text">{{isInRange ? '已到达服务地点' : '请靠近服务地点'}}</text>
+      <text class="location-distance">距离: {{distance}}m</text>
+    </view>
+    <button class="btn btn-outline check-location-btn" bindtap="checkLocation">刷新位置</button>
+  </view>
+
+  <!-- 拍照打卡 -->
+  <view class="card">
+    <text class="card-title">📸 拍照打卡</text>
+    <view class="photo-area" bindtap="takePhoto">
+      <text class="photo-icon">📷</text>
+      <text class="photo-text">点击拍照</text>
+    </view>
+    <view wx:if="{{photoPath}}" class="photo-preview">
+      <image src="{{photoPath}}" mode="aspectFit" />
+    </view>
+  </view>
+
+  <!-- 服务反馈 -->
+  <view class="card">
+    <text class="card-title">📝 服务记录</text>
+    <view class="radio-group">
+      <text class="label">老人状态</text>
+      <radio-group bindchange="onStatusChange">
+        <label class="radio-item">
+          <radio value="normal" checked="{{status === 'normal'}}" /> 正常
+        </label>
+        <label class="radio-item">
+          <radio value="attention" checked="{{status === 'attention'}}" /> 需要关注
+        </label>
+        <label class="radio-item">
+          <radio value="abnormal" checked="{{status === 'abnormal'}}" /> 异常
+        </label>
+      </radio-group>
+    </view>
+    <view class="form-group">
+      <text class="label">备注</text>
+      <textarea class="textarea" placeholder="请填写服务备注（选填）" bindinput="onNotesInput" value="{{notes}}" />
+    </view>
+  </view>
+
+  <button class="btn btn-primary submit-btn {{!isInRange ? 'disabled' : ''}}" 
+          bindtap="submitCheckin" 
+          disabled="{{!isInRange}}">
+    {{isInRange ? '提交打卡' : '请到达服务地点'}}
+  </button>
+</view>

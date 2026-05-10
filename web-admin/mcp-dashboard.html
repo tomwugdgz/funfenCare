@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>funfenCare - Web4.0 MCP 全球AI监控面板</title>
+    <style>
+        :root {
+            --primary: #2196F3;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #FF4444;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --card: #0f3460;
+            --text: #e0e0e0;
+            --text2: #aaa;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: -apple-system, "Noto Sans SC", sans-serif;
+            background: var(--dark);
+            color: var(--text);
+        }
+        /* 顶部导航 */
+        .topbar {
+            background: var(--darker);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .topbar h1 {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+        .topbar h1 span { color: white; }
+        .topbar .status {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85rem;
+        }
+        .status-item { display: flex; align-items: center; gap: 6px; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .dot-green { background: var(--success); }
+        .dot-yellow { background: var(--warning); }
+
+        /* 主布局 */
+        .main {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            min-height: calc(100vh - 60px);
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            background: var(--darker);
+            padding: 20px 0;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-item {
+            padding: 14px 24px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text2);
+            transition: all 0.2s;
+        }
+        .nav-item:hover, .nav-item.active {
+            background: rgba(33,150,243,0.15);
+            color: var(--primary);
+        }
+        .nav-icon { font-size: 1.2rem; }
+
+        /* 内容区 */
+        .content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        /* 统计卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 3px solid var(--primary);
+        }
+        .stat-card.danger { border-left-color: var(--danger); }
+        .stat-card.success { border-left-color: var(--success); }
+        .stat-card.warning { border-left-color: var(--warning); }
+        .stat-label { font-size: 0.8rem; color: var(--text2); margin-bottom: 8px; }
+        .stat-value { font-size: 2rem; font-weight: 700; }
+        .stat-trend { font-size: 0.8rem; margin-top: 6px; }
+        .trend-up { color: var(--success); }
+        .trend-down { color: var(--danger); }
+
+        /* 网格布局 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        /* 面板卡片 */
+        .panel {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .panel-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .panel-title .badge {
+            background: var(--danger);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+        }
+
+        /* 柱状图模拟 */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            height: 160px;
+            gap: 6px;
+            padding: 10px 0;
+        }
+        .bar-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .bar-fill {
+            width: 100%;
+            border-radius: 3px 3px 0 0;
+            min-height: 8px;
+            transition: height 0.3s;
+        }
+        .bar-label {
+            font-size: 0.65rem;
+            color: var(--text2);
+            margin-top: 6px;
+        }
+
+        /* 世界热力图模拟 */
+        .heatmap {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 4px;
+            padding: 10px 0;
+        }
+        .heat-cell {
+            aspect-ratio: 1;
+            border-radius: 4px;
+            background: rgba(33,150,243,0.1);
+        }
+        .heat-1 { background: rgba(33,150,243,0.2); }
+        .heat-2 { background: rgba(33,150,243,0.4); }
+        .heat-3 { background: rgba(33,150,243,0.6); }
+        .heat-4 { background: rgba(33,150,243,0.8); }
+
+        /* 预警列表 */
+        .alert-list { list-style: none; }
+        .alert-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .alert-icon { font-size: 1.3rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.75rem; color: var(--text2); }
+        .alert-time { font-size: 0.7rem; color: var(--text2); white-space: nowrap; }
+        .alert-level {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .level-critical { background: rgba(255,68,68,0.2); color: var(--danger); }
+        .level-warning { background: rgba(255,152,0,0.2); color: var(--warning); }
+
+        /* 表格 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th {
+            text-align: left;
+            padding: 10px 12px;
+            font-size: 0.75rem;
+            color: var(--text2);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .data-table td {
+            padding: 10px 12px;
+            font-size: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .status-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .tag-online { background: rgba(76,175,80,0.2); color: var(--success); }
+        .tag-offline { background: rgba(255,255,255,0.1); color: var(--text2); }
+        .tag-error { background: rgba(255,68,68,0.2); color: var(--danger); }
+
+        /* AI分析面板 */
+        .ai-card {
+            background: linear-gradient(135deg, rgba(156,39,176,0.15) 0%, rgba(33,150,243,0.15) 100%);
+            border: 1px solid rgba(156,39,176,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .ai-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #CE93D8;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ai-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        .ai-stat-label { font-size: 0.8rem; color: var(--text2); }
+        .ai-stat-value { font-size: 1rem; font-weight: 700; }
+
+        /* 环形进度 */
+        .ring-progress {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* 脱敏标签 */
+        .anonymized {
+            font-family: monospace;
+            background: rgba(255,255,255,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 1200px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <h1>☀️ funfenCare · <span>Web4.0 MCP 全球AI监控面板</span></h1>
+        <div class="status">
+            <div class="status-item"><div class="dot dot-green"></div>系统运行中</div>
+            <div class="status-item"><div class="dot dot-green"></div>AI模型正常</div>
+            <div class="status-item">数据更新: 实时</div>
+        </div>
+    </div>
+
+    <div class="main">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="nav-item active"><span class="nav-icon">📊</span> 总览仪表盘</div>
+            <div class="nav-item"><span class="nav-icon">🌍</span> 全球热力图</div>
+            <div class="nav-item"><span class="nav-icon">📡</span> 设备管理</div>
+            <div class="nav-item"><span class="nav-icon">👥</span> 用户管理</div>
+            <div class="nav-item"><span class="nav-icon">🤖</span> AI模型中心</div>
+            <div class="nav-item"><span class="nav-icon">🔔</span> 预警管理</div>
+            <div class="nav-item"><span class="nav-icon">📋</span> 服务订单</div>
+            <div class="nav-item"><span class="nav-icon">🛡️</span> 脱敏数据</div>
+            <div class="nav-item"><span class="nav-icon">📈</span> 数据分析</div>
+            <div class="nav-item"><span class="nav-icon">⚙️</span> 系统设置</div>
+        </div>
+
+        <!-- 内容区 -->
+        <div class="content">
+            <!-- 统计卡片 -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">在线用户</div>
+                    <div class="stat-value">12,847</div>
+                    <div class="stat-trend trend-up">↑ 8.2% 较昨日</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-label">活跃设备</div>
+                    <div class="stat-value">10,234</div>
+                    <div class="stat-trend trend-up">↑ 5.6% 较昨日</div>
+                </div>
+                <div class="stat-card danger">
+                    <div class="stat-label">今日预警</div>
+                    <div class="stat-value">23</div>
+                    <div class="stat-trend trend-down">↓ 12% 较昨日</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-label">服务订单</div>
+                    <div class="stat-value">1,568</div>
+                    <div class="stat-trend trend-up">↑ 15.3% 较昨日</div>
+                </div>
+            </div>
+
+            <!-- AI分析面板 + 实时预警 -->
+            <div class="grid-3">
+                <div class="panel">
+                    <div class="panel-title">
+                        🤖 AI模型全局分析
+                        <span style="font-size:0.7rem;color:var(--text2);">联邦学习 · 全球协作</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+                        <div class="ai-card">
+                            <div class="ai-title">🧠 活动模式识别</div>
+                            <div class="ai-stat"><span class="ai-stat-label">准确率</span><span class="ai-stat-value" style="color:var(--success);">96.8%</span></div>
+                            <div class="ai-stat"><span class="ai-stat-label">识别模式数</span><span class="ai-stat-value">47种</span></div>
+                            <div class="ai-stat"><span class="ai-stat-label">覆盖用户</span><span class="ai-stat-value">12,847</span></div>
+                        </div>
+                        <div class="ai-card">
+                            <div class="ai-title">🔮 风险预测</div>
+                            <div class="ai-stat"><span class="ai-stat-label">预测准确率</span><span class="ai-stat-value" style="color:var(--success);">94.2%</span></div>
+                            <div class="ai-stat"><span class="ai-stat-label">高风险用户</span><span class="ai-stat-value" style="color:var(--danger);">156人</span></div>
+                            <div class="ai-stat"><span class="ai-stat-label">已干预</span><span class="ai-stat-value" style="color:var(--success);">142人</span></div>
+                        </div>
+                        <div class="ai-card">
+                            <div class="ai-title">💡 陪护推荐</div>
+                            <div class="ai-stat"><span class="ai-stat-label">推荐满意度</span><span class="ai-stat-value" style="color:var(--success);">92.1%</span></div>
+                            <div class="ai-stat"><span class="ai-stat-label">今日推荐</span><span class="ai-stat-value">3,456次</span></div>
+                            <div class="ai-stat"><span class="ai-stat-label">采纳率</span><span class="ai-stat-value">78.5%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">📡 WebSocket在线</div>
+                    <div style="text-align:center;padding:20px 0;">
+                        <div style="font-size:3rem;font-weight:700;color:var(--primary);">24,568</div>
+                        <div style="font-size:0.8rem;color:var(--text2);margin-top:8px;">实时连接数</div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+                        <div style="text-align:center;"><div style="font-size:1.2rem;font-weight:600;color:var(--success);">12,847</div><div style="font-size:0.7rem;color:var(--text2);">用户</div></div>
+                        <div style="text-align:center;"><div style="font-size:1.2rem;font-weight:600;color:var(--primary);">10,234</div><div style="font-size:0.7rem;color:var(--text2);">设备</div></div>
+                        <div style="text-align:center;"><div style="font-size:1.2rem;font-weight:600;color:var(--warning);">1,487</div><div style="font-size:0.7rem;color:var(--text2);">房间</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 全球活动热力图 + 预警 -->
+            <div class="grid-2">
+                <div class="panel">
+                    <div class="panel-title">🌍 全球活动热力图（脱敏）</div>
+                    <p style="font-size:0.75rem;color:var(--text2);margin-bottom:12px;">基于脱敏数据，展示全球各城市独居老人活动分布</p>
+                    <div class="heatmap" id="heatmap"></div>
+                    <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text2);margin-top:8px;">
+                        <span>低活动量</span>
+                        <div style="display:flex;gap:4px;">
+                            <div style="width:16px;height:16px;border-radius:3px;background:rgba(33,150,243,0.2);"></div>
+                            <div style="width:16px;height:16px;border-radius:3px;background:rgba(33,150,243,0.4);"></div>
+                            <div style="width:16px;height:16px;border-radius:3px;background:rgba(33,150,243,0.6);"></div>
+                            <div style="width:16px;height:16px;border-radius:3px;background:rgba(33,150,243,0.8);"></div>
+                        </div>
+                        <span>高活动量</span>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">
+                        🔔 实时预警
+                        <span class="badge">3</span>
+                    </div>
+                    <ul class="alert-list">
+                        <li class="alert-item">
+                            <span class="alert-icon">🚨</span>
+                            <div class="alert-content">
+                                <div class="alert-title">检测到24小时无活动 <span class="alert-level level-critical">紧急</span></div>
+                                <div class="alert-desc">用户 <span class="anonymized">usr_a3f2***</span> · 广州</div>
+                            </div>
+                            <span class="alert-time">2分钟前</span>
+                        </li>
+                        <li class="alert-item">
+                            <span class="alert-icon">⚠️</span>
+                            <div class="alert-content">
+                                <div class="alert-title">活动模式异常 <span class="alert-level level-warning">警告</span></div>
+                                <div class="alert-desc">用户 <span class="anonymized">usr_b8c1***</span> · 上海</div>
+                            </div>
+                            <span class="alert-time">15分钟前</span>
+                        </li>
+                        <li class="alert-item">
+                            <span class="alert-icon">📡</span>
+                            <div class="alert-content">
+                                <div class="alert-title">设备离线 <span class="alert-level level-warning">警告</span></div>
+                                <div class="alert-desc">设备 <span class="anonymized">dev_x7d9***</span> · 北京</div>
+                            </div>
+                            <span class="alert-time">32分钟前</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 设备列表 + 脱敏数据 -->
+            <div class="grid-2">
+                <div class="panel">
+                    <div class="panel-title">📡 设备状态列表</div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>设备ID（脱敏）</th>
+                                <th>城市</th>
+                                <th>用户年龄段</th>
+                                <th>状态</th>
+                                <th>最后上线</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="anonymized">dev_a3f2b8c1</span></td><td>广州</td><td>70-80</td><td><span class="status-tag tag-online">在线</span></td><td>刚刚</td></tr>
+                            <tr><td><span class="anonymized">dev_x7d9e2f4</span></td><td>上海</td><td>80+</td><td><span class="status-tag tag-online">在线</span></td><td>3分钟前</td></tr>
+                            <tr><td><span class="anonymized">dev_m5k3n8p1</span></td><td>北京</td><td>60-70</td><td><span class="status-tag tag-offline">离线</span></td><td>2小时前</td></tr>
+                            <tr><td><span class="anonymized">dev_q9w2r4t6</span></td><td>深圳</td><td>70-80</td><td><span class="status-tag tag-error">异常</span></td><td>5分钟前</td></tr>
+                            <tr><td><span class="anonymized">dev_y1u3i5o7</span></td><td>杭州</td><td>80+</td><td><span class="status-tag tag-online">在线</span></td><td>1分钟前</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">🛡️ 脱敏数据规范</div>
+                    <table class="data-table">
+                        <thead><tr><th>原始数据</th><th>脱敏方式</th><th>保留信息</th></tr></thead>
+                        <tbody>
+                            <tr><td>用户ID</td><td>哈希+加盐</td><td>唯一标识</td></tr>
+                            <tr><td>手机号</td><td>完全移除</td><td>无</td></tr>
+                            <tr><td>地址</td><td>模糊到城市</td><td>城市/区域</td></tr>
+                            <tr><td>年龄</td><td>分段处理</td><td>年龄段</td></tr>
+                            <tr><td>活动数据</td><td>保留原始</td><td>活动强度</td></tr>
+                            <tr><td>健康备注</td><td>NLP提取</td><td>关键词标签</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 24h活动趋势 -->
+            <div class="panel">
+                <div class="panel-title">📈 全球24小时活动趋势</div>
+                <div class="bar-chart" id="barChart"></div>
+                <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text2);">
+                    <span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span><span>23:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 生成热力图
+        const heatmap = document.getElementById('heatmap');
+        for (let i = 0; i < 48; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'heat-cell';
+            const level = Math.floor(Math.random() * 5);
+            if (level > 0) cell.classList.add('heat-' + level);
+            heatmap.appendChild(cell);
+        }
+
+        // 生成柱状图
+        const barChart = document.getElementById('barChart');
+        const hours = [3,2,1,2,3,8,25,45,55,60,50,40,30,25,20,18,15,20,30,40,35,25,15,8];
+        hours.forEach((val, i) => {
+            const col = document.createElement('div');
+            col.className = 'bar-col';
+            const fill = document.createElement('div');
+            fill.className = 'bar-fill';
+            fill.style.height = val + '%';
+            if (val > 50) fill.style.background = 'var(--success)';
+            else if (val > 25) fill.style.background = 'var(--primary)';
+            else fill.style.background = 'rgba(33,150,243,0.4)';
+            col.appendChild(fill);
+            const label = document.createElement('div');
+            label.className = 'bar-label';
+            label.textContent = i + 'h';
+            col.appendChild(label);
+            barChart.appendChild(col);
+        });
+    </script>
+</body>
+</html>
