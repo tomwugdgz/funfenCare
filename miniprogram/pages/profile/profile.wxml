@@ -1,0 +1,37 @@
+<!--pages/profile/profile.wxml-->
+<view class="container">
+  <view class="header-card">
+    <view class="user-info">
+      <view class="avatar-box">
+        <text class="avatar-icon">👤</text>
+      </view>
+      <text class="user-name">{{user?.name || '未设置姓名'}}</text>
+      <text class="user-phone">{{user?.phone || '未绑定手机号'}}</text>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goFamily">
+      <text class="menu-icon">👨‍👩‍👧</text>
+      <text class="menu-text">亲情圈管理</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goDevices">
+      <text class="menu-icon">📡</text>
+      <text class="menu-text">设备管理</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goOrders">
+      <text class="menu-icon">📋</text>
+      <text class="menu-text">我的订单</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goSettings">
+      <text class="menu-icon">⚙️</text>
+      <text class="menu-text">设置</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <button class="btn btn-danger logout-btn" bindtap="handleLogout">退出登录</button>
+</view>

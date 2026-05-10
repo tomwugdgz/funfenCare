@@ -1,0 +1,29 @@
+<!--pages/order/order.wxml-->
+<view class="container">
+  <view class="header-card">
+    <text class="title">预约服务</text>
+  </view>
+
+  <view class="form-section">
+    <view class="form-group">
+      <text class="label">服务类型</text>
+      <picker bindchange="onTypeChange" value="{{typeIndex}}" range="{{serviceTypes}}">
+        <view class="picker-value">{{serviceTypes[typeIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="label">服务时间</text>
+      <picker mode="multiSelector" bindchange="onTimeChange" value="{{timeIndex}}" range="{{timeRange}}">
+        <view class="picker-value">{{selectedTime}}</view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="label">备注</text>
+      <textarea class="textarea" placeholder="请输入备注（选填）" value="{{notes}}" bindinput="onNotesInput" />
+    </view>
+
+    <button class="btn btn-primary submit-btn" bindtap="submitOrder">确认预约</button>
+  </view>
+</view>

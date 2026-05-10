@@ -1,0 +1,77 @@
+<!--pages/elder-home/elder-home.wxml 独居用户首页-->
+<view class="container">
+  <!-- 时间区域 -->
+  <view class="time-section">
+    <text class="greeting">{{greeting}}</text>
+    <text class="time">{{currentTime}}</text>
+    <text class="date">{{currentDate}}</text>
+  </view>
+
+  <!-- SOS紧急按钮 -->
+  <view class="sos-section">
+    <button class="sos-btn {{sosPressed ? 'pressed' : ''}}"
+            bindtouchstart="onSOSPressIn"
+            bindtouchend="onSOSPressOut"
+            bindtouchcancel="onSOSPressOut">
+      <text class="sos-icon">🆘</text>
+      <text class="sos-text">紧急求助</text>
+      <text class="sos-hint">长按3秒</text>
+    </button>
+  </view>
+
+  <!-- 快捷功能 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="callCompanion">
+      <text class="action-icon">📞</text>
+      <text class="action-text">电话陪伴</text>
+    </view>
+    <view class="action-item" bindtap="goChat">
+      <text class="action-icon">💬</text>
+      <text class="action-text">找人聊天</text>
+    </view>
+    <view class="action-item" bindtap="goCommunity">
+      <text class="action-icon">👥</text>
+      <text class="action-text">兴趣圈子</text>
+    </view>
+  </view>
+
+  <!-- 今日状态 -->
+  <view class="status-section">
+    <text class="section-title">今日状态</text>
+    <view class="status-row">
+      <view class="status-item">
+        <text class="status-icon">⏰</text>
+        <text class="status-value">{{report.wakeTime || '07:30'}}</text>
+        <text class="status-label">起床时间</text>
+      </view>
+      <view class="status-item">
+        <text class="status-icon">🚶</text>
+        <text class="status-value">{{report.statusText}}</text>
+        <text class="status-label">活动量</text>
+      </view>
+      <view class="status-item">
+        <text class="status-icon">😊</text>
+        <text class="status-value">良好</text>
+        <text class="status-label">心情</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日服务 -->
+  <view class="services-section">
+    <text class="section-title">今日服务</text>
+    <view wx:for="{{todayServices}}" wx:key="id" class="service-item">
+      <text class="service-time">{{item.time}}</text>
+      <view class="service-info">
+        <text class="service-name">{{item.name}}</text>
+        <text class="service-desc">{{item.desc}}</text>
+      </view>
+      <view class="service-badge {{item.status === 'completed' ? 'done' : 'pending'}}">
+        <text class="badge-text">{{item.status === 'completed' ? '已完成' : '待服务'}}</text>
+      </view>
+    </view>
+    <view wx:if="{{todayServices.length === 0}}" class="empty-services">
+      <text class="empty-text">今日暂无服务安排</text>
+    </view>
+  </view>
+</view>

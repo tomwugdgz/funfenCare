@@ -1,0 +1,84 @@
+<!--pages/home/home.wxml 监护人首页-->
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="header-left">
+      <text class="header-title">☀️ funfenCare</text>
+    </view>
+    <view class="header-right" bindtap="goProfile">
+      <text class="avatar">👤</text>
+    </view>
+  </view>
+
+  <!-- 老人状态卡片 -->
+  <view class="section">
+    <text class="section-title">我关注的家人</text>
+    
+    <view wx:for="{{elders}}" wx:key="id" class="elder-card" bindtap="goElderDetail" data-id="{{item.id}}">
+      <!-- 老人信息头部 -->
+      <view class="elder-header">
+        <view class="elder-avatar">
+          <text class="elder-avatar-icon">👴</text>
+        </view>
+        <view class="elder-info">
+          <text class="elder-name">{{item.name || '未设置姓名'}}</text>
+          <view class="status-badge {{item.anomaly ? 'danger' : item.score >= 80 ? 'good' : 'warning'}}">
+            <text class="status-text">{{item.anomaly ? '⚠️ 异常' : item.statusText}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 活动数据 -->
+      <view class="activity-row">
+        <view class="activity-item">
+          <text class="activity-value">{{item.score}}分</text>
+          <text class="activity-label">活动指数</text>
+        </view>
+        <view class="activity-item">
+          <text class="activity-value">{{item.wakeTime || '--:--'}}</text>
+          <text class="activity-label">起床时间</text>
+        </view>
+        <view class="activity-item">
+          <text class="activity-value">{{item.sleepTime || '--:--'}}</text>
+          <text class="activity-label">入睡时间</text>
+        </view>
+      </view>
+
+      <!-- AI建议 -->
+      <view wx:if="{{item.insights && item.insights.length > 0}}" class="insights-box">
+        <text class="insights-title">💡 AI建议</text>
+        <text wx:for="{{item.insights}}" wx:for-item="insight" wx:key="*this" class="insight-text">• {{insight}}</text>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{elders.length === 0}}" class="empty-state">
+      <text class="empty-icon">👨‍👩‍👧</text>
+      <text class="empty-text">还没有添加家人</text>
+      <button class="btn btn-primary add-btn" bindtap="goAddFamily">+ 添加家人</button>
+    </view>
+  </view>
+
+  <!-- 快捷服务 -->
+  <view class="section">
+    <text class="section-title">快捷服务</text>
+    <view class="services-grid">
+      <view class="service-item" bindtap="goOrderService" data-type="door_check">
+        <text class="service-icon">🚪</text>
+        <text class="service-name">上门打卡</text>
+      </view>
+      <view class="service-item" bindtap="goOrderService" data-type="chat">
+        <text class="service-icon">📞</text>
+        <text class="service-name">陪聊服务</text>
+      </view>
+      <view class="service-item" bindtap="goOrderService" data-type="companion">
+        <text class="service-icon">👥</text>
+        <text class="service-name">陪护服务</text>
+      </view>
+      <view class="service-item" bindtap="goReports">
+        <text class="service-icon">📊</text>
+        <text class="service-name">健康报告</text>
+      </view>
+    </view>
+  </view>
+</view>

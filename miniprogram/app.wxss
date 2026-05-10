@@ -1,0 +1,92 @@
+/**app.wxss**/
+page {
+  background-color: #F5F7FA;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+}
+
+/* 适老化基础样式 */
+.container {
+  padding: 32rpx;
+}
+
+/* 按钮基础样式 */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 112rpx;
+  padding: 24rpx 40rpx;
+  border-radius: 24rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #2196F3;
+  color: #ffffff;
+}
+
+.btn-danger {
+  background-color: #FF4444;
+  color: #ffffff;
+}
+
+.btn-warning {
+  background-color: #FF9800;
+  color: #ffffff;
+}
+
+.btn-outline {
+  background-color: #ffffff;
+  color: #2196F3;
+  border: 4rpx solid #2196F3;
+}
+
+/* 卡片样式 */
+.card {
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+}
+
+/* 输入框样式 */
+.input {
+  background-color: #ffffff;
+  border: 2rpx solid #E0E0E0;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  font-size: 40rpx;
+  margin-bottom: 40rpx;
+}
+
+/* 文字大小 */
+.text-xs { font-size: 32rpx; }
+.text-sm { font-size: 36rpx; }
+.text-md { font-size: 40rpx; }
+.text-lg { font-size: 48rpx; }
+.text-xl { font-size: 56rpx; }
+.text-xxl { font-size: 64rpx; }
+
+/* 文字颜色 */
+.text-primary { color: #2196F3; }
+.text-danger { color: #FF4444; }
+.text-warning { color: #FF9800; }
+.text-success { color: #4CAF50; }
+.text-secondary { color: #666666; }
+.text-light { color: #999999; }
+
+/* 状态标签 */
+.status-badge {
+  display: inline-block;
+  padding: 8rpx 24rpx;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.status-good { background-color: #4CAF50; }
+.status-warning { background-color: #FF9800; }
+.status-danger { background-color: #FF4444; }

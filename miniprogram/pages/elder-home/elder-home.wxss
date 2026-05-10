@@ -1,0 +1,214 @@
+/* pages/elder-home/elder-home.wxss 适老化设计 */
+.container {
+  min-height: 100vh;
+  background-color: #F5F7FA;
+  padding-bottom: 40rpx;
+}
+
+.time-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 32rpx 40rpx;
+  background-color: #ffffff;
+}
+
+.greeting {
+  font-size: 48rpx;
+  color: #666;
+}
+
+.time {
+  font-size: 140rpx;
+  font-weight: bold;
+  color: #2196F3;
+  margin: 10rpx 0;
+}
+
+.date {
+  font-size: 40rpx;
+  color: #666;
+}
+
+/* SOS按钮 - 超大按钮 */
+.sos-section {
+  padding: 40rpx 32rpx;
+}
+
+.sos-btn {
+  background-color: #FF4444;
+  border-radius: 48rpx;
+  padding: 60rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 12rpx 24rpx rgba(255, 68, 68, 0.3);
+  border: none;
+}
+
+.sos-btn.pressed {
+  background-color: #CC0000;
+  transform: scale(0.98);
+}
+
+.sos-icon {
+  font-size: 160rpx;
+}
+
+.sos-text {
+  font-size: 96rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: 16rpx;
+}
+
+.sos-hint {
+  font-size: 40rpx;
+  color: #FFCCCC;
+  margin-top: 16rpx;
+}
+
+/* 快捷功能 */
+.quick-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 32rpx;
+  margin-bottom: 40rpx;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 40rpx 24rpx;
+  border-radius: 24rpx;
+  min-width: 200rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.action-icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.action-text {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 状态卡片 */
+.status-section {
+  background-color: #ffffff;
+  margin: 0 32rpx 32rpx;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 24rpx;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status-icon {
+  font-size: 64rpx;
+  margin-bottom: 12rpx;
+}
+
+.status-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #2196F3;
+}
+
+.status-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-top: 8rpx;
+}
+
+/* 今日服务 */
+.services-section {
+  background-color: #ffffff;
+  margin: 0 32rpx 32rpx;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 2rpx solid #F0F0F0;
+}
+
+.service-time {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #2196F3;
+  min-width: 120rpx;
+}
+
+.service-info {
+  flex: 1;
+  margin-left: 24rpx;
+}
+
+.service-name {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+}
+
+.service-desc {
+  font-size: 28rpx;
+  color: #666;
+  margin-top: 8rpx;
+  display: block;
+}
+
+.service-badge {
+  padding: 8rpx 24rpx;
+  border-radius: 999rpx;
+}
+
+.service-badge.pending {
+  background-color: #FFF3CD;
+}
+
+.service-badge.done {
+  background-color: #D4EDDA;
+}
+
+.badge-text {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.empty-services {
+  padding: 60rpx 0;
+  text-align: center;
+}
+
+.empty-text {
+  font-size: 36rpx;
+  color: #999;
+}

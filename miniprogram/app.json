@@ -1,0 +1,60 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/elder-home/elder-home",
+    "pages/monitor/monitor",
+    "pages/order/order",
+    "pages/profile/profile",
+    "pages/family/family",
+    "pages/report/report",
+    "pages/emergency/emergency"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "funfenCare",
+    "navigationBarBackgroundColor": "#2196F3",
+    "backgroundColor": "#F5F7FA",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#2196F3",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/monitor/monitor",
+        "text": "监控",
+        "iconPath": "assets/icons/monitor.png",
+        "selectedIconPath": "assets/icons/monitor-active.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "服务",
+        "iconPath": "assets/icons/order.png",
+        "selectedIconPath": "assets/icons/order-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/icons/profile.png",
+        "selectedIconPath": "assets/icons/profile-active.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000,
+    "uploadFile": 10000
+  },
+  "debug": false,
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

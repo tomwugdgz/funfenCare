@@ -1,0 +1,44 @@
+<!--pages/monitor/monitor.wxml 实时监控页面-->
+<view class="container">
+  <view class="header-card">
+    <text class="elder-name">{{elderName}}</text>
+    <text class="monitor-date">{{date}}</text>
+  </view>
+
+  <!-- 活动曲线图（简化版） -->
+  <view class="card">
+    <text class="card-title">24小时活动曲线</text>
+    <view class="chart-container">
+      <view wx:for="{{activityData}}" wx:key="hour" class="chart-bar-wrapper">
+        <view class="chart-bar {{item.activity > 0.5 ? 'high' : item.activity > 0.2 ? 'medium' : 'low'}}"
+              style="height: {{item.activity * 200}}rpx;"></view>
+        <text class="chart-label">{{item.hour}}时</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 实时状态 -->
+  <view class="card">
+    <text class="card-title">实时状态</text>
+    <view class="status-grid">
+      <view class="status-item">
+        <text class="status-label">活动指数</text>
+        <text class="status-value {{statusClass}}">{{activityScore}}</text>
+      </view>
+      <view class="status-item">
+        <text class="status-label">设备状态</text>
+        <text class="status-value online">在线</text>
+      </view>
+      <view class="status-item">
+        <text class="status-label">今日异常</text>
+        <text class="status-value {{anomaly ? 'danger' : 'good'}}">{{anomaly ? '有' : '无'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI分析 -->
+  <view class="card insights">
+    <text class="card-title">💡 AI分析</text>
+    <text wx:for="{{insights}}" wx:for-item="insight" wx:key="*this" class="insight-item">• {{insight}}</text>
+  </view>
+</view>

@@ -1,0 +1,61 @@
+/* pages/order/order.wxss */
+.container {
+  min-height: 100vh;
+  background-color: #F5F7FA;
+  padding: 32rpx;
+}
+
+.header-card {
+  background-color: #2196F3;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.form-section {
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+}
+
+.form-group {
+  margin-bottom: 40rpx;
+}
+
+.label {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.picker-value {
+  background-color: #F8F9FA;
+  border: 2rpx solid #E0E0E0;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  font-size: 40rpx;
+  color: #333;
+}
+
+.textarea {
+  background-color: #F8F9FA;
+  border: 2rpx solid #E0E0E0;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  font-size: 40rpx;
+  min-height: 200rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  margin-top: 48rpx;
+}

@@ -1,0 +1,41 @@
+{
+  "name": "funfenCare 微信小程序",
+  "version": "2.0.0",
+  "description": "独居老人安全监护与亲情连接平台",
+  "appid": "",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "autoStrong": false,
+    "coverView": true,
+    "nodeModules": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "showShadowRootInWxmlPanel": true,
+    "useCompilerModule": true,
+    "compileWorklet": false,
+    "minifyWXML": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.3.4",
+  "srcMiniprogramRoot": "",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  }
+}
