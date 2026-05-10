@@ -6,6 +6,10 @@
 ![License](https://img.shields.io/badge/license-Apache--2.0-green)
 ![Status](https://img.shields.io/badge/status-开发中-orange)
 
+## 🚀 快速体验 DEMO
+
+用微信开发者工具打开 `miniprogram/` 目录即可运行演示。
+
 ---
 
 ## 📑 目录

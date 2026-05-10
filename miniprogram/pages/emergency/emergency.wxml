@@ -1,0 +1,47 @@
+<!--pages/emergency/emergency.wxml-->
+<view class="emergency-container">
+  <view class="emergency-header">
+    <text class="emergency-icon">🚨</text>
+    <text class="emergency-title">紧急求助</text>
+  </view>
+
+  <view class="card">
+    <text class="card-title">求助类型</text>
+    <view class="type-grid">
+      <view class="type-item" bindtap="selectType" data-type="fall">
+        <text class="type-icon">🤕</text>
+        <text class="type-text">摔倒了</text>
+      </view>
+      <view class="type-item" bindtap="selectType" data-type="ill">
+        <text class="type-icon">🤒</text>
+        <text class="type-text">不舒服</text>
+      </view>
+      <view class="type-item" bindtap="selectType" data-type="help">
+        <text class="type-icon">🆘</text>
+        <text class="type-text">需要帮助</text>
+      </view>
+      <view class="type-item" bindtap="selectType" data-type="other">
+        <text class="type-icon">📞</text>
+        <text class="type-text">其他</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="card-title">紧急联系人</text>
+    <view wx:for="{{contacts}}" wx:key="id" class="contact-item" bindtap="callContact" data-phone="{{item.phone}}">
+      <view class="contact-avatar">
+        <text class="contact-icon">👤</text>
+      </view>
+      <view class="contact-info">
+        <text class="contact-name">{{item.name}}</text>
+        <text class="contact-relation">{{item.relation}}</text>
+      </view>
+      <view class="contact-call">
+        <text class="call-icon">📞</text>
+      </view>
+    </view>
+  </view>
+
+  <button class="btn btn-danger sos-btn" bindtap="triggerSOS">🆘 一键SOS求助</button>
+</view>

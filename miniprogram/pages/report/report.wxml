@@ -1,0 +1,59 @@
+<!--pages/report/report.wxml-->
+<view class="container">
+  <view class="header-card">
+    <text class="title">健康报告</text>
+  </view>
+
+  <view class="card">
+    <text class="card-title">选择日期</text>
+    <picker mode="date" bindchange="onDateChange" value="{{date}}">
+      <view class="picker-value">{{date}}</view>
+    </picker>
+  </view>
+
+  <view class="card report-card">
+    <text class="card-title">📊 活动概览</text>
+    <view class="score-ring">
+      <view class="score-value {{scoreClass}}">{{report.score}}</view>
+      <text class="score-label">活动指数</text>
+    </view>
+    <view class="detail-grid">
+      <view class="detail-item">
+        <text class="detail-icon">⏰</text>
+        <text class="detail-label">起床</text>
+        <text class="detail-value">{{report.wakeTime}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-icon">🌙</text>
+        <text class="detail-label">入睡</text>
+        <text class="detail-value">{{report.sleepTime}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-icon">🚶</text>
+        <text class="detail-label">活动时长</text>
+        <text class="detail-value">{{report.activeMinutes}}分钟</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card insights-card">
+    <text class="card-title">💡 AI分析建议</text>
+    <view wx:for="{{report.insights}}" wx:key="*this" class="insight-item">
+      <text class="insight-dot">•</text>
+      <text class="insight-text">{{item}}</text>
+    </view>
+    <view wx:if="{{report.insights.length === 0}}" class="empty-text">暂无AI分析数据</view>
+  </view>
+
+  <view class="card services-card">
+    <text class="card-title">📋 今日服务记录</text>
+    <view wx:for="{{report.services}}" wx:key="id" class="service-item">
+      <view class="service-time">{{item.time}}</view>
+      <view class="service-info">
+        <text class="service-name">{{item.type}}</text>
+        <text class="service-status">{{item.status}}</text>
+      </view>
+    </view>
+    <view wx:if="{{report.services.length === 0}}" class="empty-text">今日暂无服务记录</view>
+  </view>
+</view>
